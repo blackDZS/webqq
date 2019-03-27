@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WebQQ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="support/jquery-ui.css">
+    <link rel="stylesheet" href="lib/css/main.css">
+
+    <script src="support/jquery-3.3.1.min.js"></script>
+    <script src="support/jquery-ui.js"></script>
+
+    <script src="lib/js/UUID.js"></script>
+    <script src="lib/js/Connector.js"></script>
+    <script src="lib/js/DlgLogin.js"></script>
+    <script src="lib/js/DlgRegister.js"></script>
+    <script>
+        $(document).ready(function () {
+            showLoginDialog();
+            $('a#toRegister').click(function (e) {
+                e.preventDefault();
+                showRegisterDialog();
+
+            });
+        });
+
+        function showLoginDialog() {
+            new Dlglogin({
+                div: "dlg"
+            });
+        };
+
+        function showRegisterDialog() {
+            new Dlgregister({
+                div: "dlg2"
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="dlg"></div>
+    <div id="dlg2"></div>
+</body>
+
+</html>
