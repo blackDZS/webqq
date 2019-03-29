@@ -35,4 +35,4 @@ INSERT INTO users(username, password, email, realname, mobile) VALUES
 
 SELECT * FROM users WHERE username='dzs' AND password=md5('123456');
 
-SELECT count(1) FROM users WHERE username='dzs' AND password=md5('123456');
+SELECT count(1) FROM users WHERE username='dzs' AND password='123456'
