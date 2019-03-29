@@ -51,7 +51,6 @@ class UserServer extends Server
 
     public function Register()
     {
-
         $data = $this->_request->params;
         $username = $data->username;
         $password = $data->password;
