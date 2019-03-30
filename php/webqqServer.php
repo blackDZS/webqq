@@ -4,20 +4,24 @@
 include_once './Server.php';
 include_once './dbconfig.php';
 include_once './UserServer.php';
+include_once './UserMessages.php';
 
 $request = json_decode($_REQUEST["request"]);
 $type = $request->type;
 
 $_request = explode('_', $type);
-
+// echo $_request[0];
 // echo $connstr;
 $sv = new Server();
-$sv->$_REQUEST = $request;
 
 if($_request[0] == "USER"){
     $sv = new UserServer();
-}else{
-    
+}elseif($_request[0] == "MESSAGEASK"){
+    // echo "MESSAGEASK";
+    $sv = new UserMessage();
+}elseif( $_request[0] == "SENDMESSAGE"){
+    // echo "SENDMESSAGE";
+    $sv = new UserMessage();
 }
 
 $sv->makeRequest($request);

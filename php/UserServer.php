@@ -43,7 +43,15 @@ class UserServer extends Server
         if ((int)$row[0] == 0) {
             $this->makeFaliureResponce("用户不存在", "");
         } elseif ((int)$row[0] == 1) {
-            $this->makeSuccessResponce("成功登录", "");
+            $sql = "SELECT username FROM users WHERE id IN(
+                        SELECT user2 FROM qq_friendship WHERE user1 IN(
+                            SELECT id FROM users WHERE username='$username'
+                        )
+                    )";
+
+            $result = @pg_query($this->conn, $sql);
+            $row = @pg_fetch_all($result);
+            $this->makeSuccessResponce("成功登录", $row);
         }
         @pg_free_result($result);
         return true;

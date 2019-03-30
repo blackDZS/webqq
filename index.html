@@ -6,11 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>WebQQ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="support/bootstrap.min.css">
     <link rel="stylesheet" href="support/jquery-ui.css">
+
     <link rel="stylesheet" href="lib/css/main.css">
 
     <script src="support/jquery-3.3.1.min.js"></script>
     <script src="support/jquery-ui.js"></script>
+    <script src="support/popper.min.js"></script>
+    <script src="support/bootstrap.min.js"></script>
 
     <script src="lib/js/UUID.js"></script>
     <script src="lib/js/Connector.js"></script>
@@ -41,6 +45,58 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-dark bg-dark justify-content-between hidden">
+        <a class="navbar-brand" style="color:#fff">WebQQ</a>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="查找好友" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">查找好友</button>
+        </form>
+    </nav>
+    <div class="container-fluid hidden">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>好友列表</span>
+                        <a class="d-flex align-items-center text-muted" href="#">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    <br>
+                    <ul class="nav flex-column mb-2" id="friends_list">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                好友A
+                                <br>
+                            </a>
+                        </li>
+                        <br> -->
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2" id="current_friend">Welcome!</h1>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-dark" id="message_q_a">
+                        <tbody>
+                            <!-- <tr>
+                                <td class=""></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </main>
+        </div>
+    </div>
     <div id="dlg"></div>
     <div id="dlg2"></div>
 </body>
