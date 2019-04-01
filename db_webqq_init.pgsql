@@ -8,14 +8,17 @@ CREATE TABLE users(
     mobile varchar(11),
     registertime timestamp DEFAULT now()
 );
+INSERT INTO users(username, password, email, realname, mobile) VALUES
+('x', 'x', 'x', 'x', '2');
 
 SELECT * FROM users;
 
 SELECT * FROM qq_friendship;
+DROP TABLE qq_friendship;
 CREATE TABLE qq_friendship(
     id serial PRIMARY KEY,
-    user1 INTEGER NOT NULL,
-    user2 INTEGER NOT NULL
+    user1 varchar(32) NOT NULL,
+    user2 varchar(32) NOT NULL
 );
 
 CREATE TABLE qq_message(
@@ -35,12 +38,12 @@ CREATE TABLE qq_message(
     sendtime timestamp DEFAULT now()
 );
 INSERT INTO qq_message(fromuser, touser, message) VALUES
-('w', 'a', 'w 发给 a'),
-('q', 'a', 'q 发给 a'),
-('a', 'w', 'a 发给 w'),
-('q', 'w', 'q 发给 w'),
+('a', 'd', 'a 发给 d'),
 ('a', 'q', 'a 发给 q'),
-('w', 'q', 'w 发给 q');
+('a', 'r', 'a 发给 r'),
+('d', 'a', 'd 发给 a'),
+('q', 'a', 'q 发给 a'),
+('r', 'a', 'r 发给 a');
 
 
 SELECT * FROM qq_message;
@@ -55,8 +58,12 @@ SELECT * FROM users WHERE username='dzs' AND password=md5('123456');
 SELECT count(1) FROM users WHERE username='dzs' AND password='123456';
 
 INSERT INTO qq_friendship(user1, user2) VALUES
-(8, 7),
-(9, 7);
+('a', 'd'),
+('a', 'q'),
+('a', 'r'),
+('d', 'a'),
+('q', 'a'),
+('r', 'a')
 
 SELECT username FROM users WHERE id IN (
     SELECT user2 FROM qq_friendship WHERE user1 IN (

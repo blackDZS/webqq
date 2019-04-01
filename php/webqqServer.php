@@ -19,9 +19,12 @@ if($_request[0] == "USER"){
 }elseif($_request[0] == "MESSAGEASK"){
     // echo "MESSAGEASK";
     $sv = new UserMessage();
-}elseif( $_request[0] == "SENDMESSAGE"){
+}elseif($_request[0] == "SENDMESSAGE"){
     // echo "SENDMESSAGE";
     $sv = new UserMessage();
+}elseif($_request[0] == "FRIENDS"){
+    $sv = new UserServer();
+    // echo "ADDFRIENDS";
 }
 
 $sv->makeRequest($request);

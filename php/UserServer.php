@@ -25,6 +25,9 @@ class UserServer extends Server
             case "USER_REGISTER":
                 $this->Register();
                 break;
+            case "FRIENDS_ADD":
+                $this->Addfriends();
+                break;
         }
     }
 
@@ -43,11 +46,12 @@ class UserServer extends Server
         if ((int)$row[0] == 0) {
             $this->makeFaliureResponce("用户不存在", "");
         } elseif ((int)$row[0] == 1) {
-            $sql = "SELECT username FROM users WHERE id IN(
-                        SELECT user2 FROM qq_friendship WHERE user1 IN(
-                            SELECT id FROM users WHERE username='$username'
-                        )
-                    )";
+            // $sql = "SELECT username FROM users WHERE id IN(
+            //             SELECT user2 FROM qq_friendship WHERE user1 IN(
+            //                 SELECT id FROM users WHERE username='$username'
+            //             )
+            //         )";
+            $sql = "SELECT user2 FROM qq_friendship WHERE user1 = '$username'";
 
             $result = @pg_query($this->conn, $sql);
             $row = @pg_fetch_all($result);
@@ -86,5 +90,21 @@ class UserServer extends Server
             }
         }
         return true;
+    }
+
+    public function Addfriends()
+    {
+        // var_dump("add_friends");
+        $username = $this->_request->params->username;
+        $friends = $this->_request->params->friends;
+        // var_dump($friends);
+        $sql = "INSERT INTO qq_friendship(user1, user2) VALUES ('$username', '$friends'), ('$friends', '$username');";
+        $result = @pg_query($this->conn, $sql);
+        $sql = "SELECT user2 FROM qq_friendship WHERE user1 = '$username'";
+
+        $result = @pg_query($this->conn, $sql);
+        $row = @pg_fetch_all($result);
+        $this->makeSuccessResponce("添加成功", $row);
+        // $this->makeSuccessResponce("成功添加", "");
     }
 }
